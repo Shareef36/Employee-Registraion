@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.socgen.org/domainobjects"
+	xmlns:tns="http://www.socgen.org/domainobjects"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	elementFormDefault="qualified">
+
+		<complexType name="employee">
+			<sequence>
+				<element name="firstName" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element name="lastName" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element name="gender" type="tns:gender" minOccurs="1"
+					maxOccurs="1" />
+				<element name="dateOfBirth" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element name="department" type="string" minOccurs="1"
+					maxOccurs="1" />
+				
+			</sequence>
+		</complexType>
+	
+
+<element name="employeeRegistrationRequest">
+		<complexType>
+			<sequence>
+				<element name="employee" type="tns:employee" minOccurs="1"
+					maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<element name="employeeRegistrationResponse">
+		<complexType>
+			<sequence>
+				<element name="employeeDetails" type="tns:employee" minOccurs="1"
+					maxOccurs="1" />
+				<element name="statusType" type="tns:statusType" minOccurs="1"
+					maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<complexType name="statusType">
+		<sequence>
+			<element name="statusCode" type="tns:statusCode"
+				minOccurs="0" maxOccurs="1"></element>
+			<element name="message" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="errors" type="tns:errorType" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+<simpleType name="statusCode">
+		<annotation>
+			<!-- <appinfo>
+				<jaxb:typesafeEnumClass />
+			</appinfo> -->
+		</annotation>
+		<restriction base="string">
+			<enumeration value="SUCCESS">
+				<annotation>
+					<!-- <appinfo>
+						<jaxb:typesafeEnumMember name="SUCCESS" />
+					</appinfo> -->
+				</annotation>
+			</enumeration>
+			<enumeration value="FAILED">
+				<annotation>
+					<!-- <appinfo>
+						<jaxb:typesafeEnumMember name="FAILED" />
+					</appinfo> -->
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="error">
+		<sequence>
+			<element name="errorCode" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="errorMsg" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="uuid" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="errorType">
+		<sequence>
+			<element name="error" type="tns:error" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<simpleType name="gender">
+		<annotation>
+			<appinfo>
+				<jaxb:typesafeEnumClass />
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="MALE">
+				<annotation>
+					<appinfo>
+						<jaxb:typesafeEnumMember name="MALE" />
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="FEMALE">
+				<annotation>
+					<appinfo>
+						<jaxb:typesafeEnumMember name="FEMALE" />
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="OTHERS">
+				<annotation>
+					<appinfo>
+						<jaxb:typesafeEnumMember name="OTHERS" />
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	
+</schema>
