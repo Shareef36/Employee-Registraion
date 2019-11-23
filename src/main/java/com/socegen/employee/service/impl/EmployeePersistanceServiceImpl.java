@@ -1,5 +1,6 @@
 package com.socegen.employee.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -27,6 +28,11 @@ public class EmployeePersistanceServiceImpl implements EmployeePersistanceServic
 			return employeeRepository.save(employeeEntity);
 		}
 		return employeeEntity;
+	}
+
+	@Override
+	public List<Employee> findAll() {
+		return employeeRepository.findAll();
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.socegen.employee.controller;
 
+import java.util.List;
+
+import org.socgen.domainobjects.Employee;
 import org.socgen.domainobjects.EmployeeRegistrationRequest;
 import org.socgen.domainobjects.EmployeeRegistrationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,13 @@ public class EmployeeController {
 		UniqueIdGenerator uniqueIdGenerator = new UniqueIdGenerator();
 		String uuId = uniqueIdGenerator.getUUID();
 		return employeeService.register(employeeRegistrationRequest, uuId);
+	}
+	
+	@RequestMapping(value = "/allemployees", method = RequestMethod.GET)
+	public List<Employee> getAllEmployees() {
+		UniqueIdGenerator uniqueIdGenerator = new UniqueIdGenerator();
+		String uuId = uniqueIdGenerator.getUUID();
+		return employeeService.findAll(uuId);
 	}
 	
 	

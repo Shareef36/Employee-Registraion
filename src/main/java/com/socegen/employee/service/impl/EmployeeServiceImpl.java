@@ -1,5 +1,7 @@
 package com.socegen.employee.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
@@ -80,6 +82,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 		return mapper.convertValue(employee, clazz);
+	}
+
+	@Override
+	public List<Employee> findAll(String uuId) {
+		List<com.socegen.employee.model.db.Employee> entityEmployees = employeePersistanceService.findAll();
+		List<Employee> employees = new ArrayList<>();
+		entityEmployees.stream().forEach(employee -> {
+			Employee domainObj = (Employee) convertObject(employee, Employee.class);
+			employees.add(domainObj);
+		});
+		return employees;
 	}
 	
 	
